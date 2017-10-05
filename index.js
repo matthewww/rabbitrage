@@ -35,7 +35,7 @@ function getRate(settings) {
                 console.log(`${settings.exchange} ${settings.locale} rate: ${rate}`);
 
                 resolve(rate);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 console.log("-- API ERROR --");
             });;
     });
@@ -50,3 +50,21 @@ function navigateApiPath(json, apiPath) {
 
     return location;
 }
+
+
+var fs = require('fs');
+var dateMS = Date.now();
+var result = require('./data.json');
+
+console.log(result)
+result[dateMS] = 'x';
+
+fs.writeFile("./data.json", JSON.stringify(result), function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log('Data saved at ' + new Date(dateMS));
+});
+
+
